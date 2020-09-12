@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.khodand.pycharmplugin.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.khodand.pycharmplugin.MyBundle
 
 class MyApplicationService {
 
