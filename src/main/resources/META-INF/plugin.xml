@@ -6,11 +6,12 @@
     <!-- Product and plugin compatibility requirements -->
     <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
-    <depends>com.intellij.modules.python-core-capable</depends>
+    <!--<depends>com.intellij.modules.python-core-capable</depends>-->
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.khodand.pycharmplugin.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.khodand.pycharmplugin.services.MyProjectService"/>
+        <localInspection implementationClass="com.github.khodand.pycharmplugin.inspection.CodeInspection"/>
     </extensions>
 
     <projectListeners>
