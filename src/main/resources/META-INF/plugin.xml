@@ -1,11 +1,12 @@
 <idea-plugin>
     <id>com.github.khodand.pycharmplugin</id>
-    <name>pycharm-plugin</name>
-    <vendor>khodand</vendor>
+    <name>Pycharm Variables</name>
+    <vendor email="andrei.khodko@gmail.com">Andrei Khodko</vendor>
 
     <!-- Product and plugin compatibility requirements -->
     <!-- https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.python-core-capable</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.khodand.pycharmplugin.services.MyApplicationService"/>
