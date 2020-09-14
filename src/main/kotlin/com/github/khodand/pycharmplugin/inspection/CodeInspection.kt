@@ -22,21 +22,6 @@ import javax.swing.event.DocumentEvent
 class CodeInspection : LocalInspectionTool() {
     private val myQuickFix = CriQuickFix()
 
-    // This string holds a list of classes relevant to this inspection.
-//    @NonNls
-//    var CHECKED_CLASSES = ""
-//    override fun createOptionsPanel(): JComponent? {
-//        val panel = JPanel(FlowLayout(FlowLayout.LEFT))
-//        val checkedClasses = JTextField(CHECKED_CLASSES)
-//        checkedClasses.document.addDocumentListener(object : DocumentAdapter() {
-//            public override fun textChanged(event: DocumentEvent) {
-//                CHECKED_CLASSES = checkedClasses.text
-//            }
-//        })
-//        panel.add(checkedClasses)
-//        return panel
-//    }
-
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
         return object : PsiElementVisitor() {
             @NonNls
@@ -48,7 +33,12 @@ class CodeInspection : LocalInspectionTool() {
             override fun visitElement(element: PsiElement) {
                 super.visitElement(element)
                 if (element is PyAssignmentStatement) {
-                    println(element.getText())
+                    println("AssignmentStatement: " + element.getText())
+                    println("annotationValue: " + element.annotationValue)
+                    if (element.annotationValue != null) {
+                        return
+                    }
+                    println("registerProblem")
                     holder.registerProblem(element,
                             DESCRIPTION_TEMPLATE, myQuickFix)
                 }
@@ -61,13 +51,6 @@ class CodeInspection : LocalInspectionTool() {
             return QUICK_FIX_NAME
         }
 
-        /**
-         * This method manipulates the PSI tree to replace 'a==b' with 'a.equals(b)
-         * or 'a!=b' with '!a.equals(b)'
-         *
-         * @param project    The project that contains the file being edited.
-         * @param descriptor A problem found by this inspection.
-         */
         override fun applyFix(project: Project, descriptor: ProblemDescriptor) {
             try {
                 val statement = descriptor.psiElement as PyAssignmentStatement
@@ -89,8 +72,7 @@ class CodeInspection : LocalInspectionTool() {
 
     companion object {
         // Defines the text of the quick fix intention
-        val QUICK_FIX_NAME = "SDK: " +
-                InspectionsBundle.message("inspection.comparing.references.use.quickfix")
+        val QUICK_FIX_NAME = "SDK: Helo boy"
         private val LOG = Logger.getInstance("#com.intellij.codeInspection.ComparingReferencesInspection")
     }
 }
