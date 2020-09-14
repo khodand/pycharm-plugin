@@ -27,14 +27,11 @@ class AssignmentAnnotationQuickFix : LocalQuickFix {
 
             val annotatedAssignment = PyElementGenerator.getInstance(project)
                     .createFromText<PyAssignmentStatement>(LanguageLevel.PYTHON38
-                            , PyAssignmentStatement::class.java, "a: int = b  # hi!")
+                            , PyAssignmentStatement::class.java, "a: int = b")
             statement.leftHandSideExpression?.let { annotatedAssignment.leftHandSideExpression!!.replace(it) }
             statement.assignedValue?.let { annotatedAssignment.assignedValue!!.replace(it) }
             if (statement.lastChild is PsiComment) {
-                annotatedAssignment.lastChild!!.replace(statement.lastChild)
-            }
-            else {
-                annotatedAssignment.lastChild.delete()
+                annotatedAssignment.addAfter(statement.lastChild, annotatedAssignment.lastChild)
             }
 
             statement.replace(annotatedAssignment)
