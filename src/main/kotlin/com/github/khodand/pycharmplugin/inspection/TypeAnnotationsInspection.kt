@@ -11,7 +11,7 @@ import com.jetbrains.python.psi.PyFunction
 import org.jetbrains.annotations.NonNls
 
 
-class CodeInspection : PyInspection() {
+class TypeAnnotationsInspection : PyInspection() {
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PyElementVisitor {
         return object : PyElementVisitor() {
             @NonNls

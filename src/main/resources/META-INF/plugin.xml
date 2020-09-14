@@ -19,7 +19,7 @@
                 groupKey="group.names.probable.bugs"
                 enabledByDefault="true"
                 level="WARNING"
-                implementationClass="com.github.khodand.pycharmplugin.inspection.CodeInspection"/>
+                implementationClass="com.github.khodand.pycharmplugin.inspection.TypeAnnotationsInspection"/>
     </extensions>
 
     <projectListeners>
