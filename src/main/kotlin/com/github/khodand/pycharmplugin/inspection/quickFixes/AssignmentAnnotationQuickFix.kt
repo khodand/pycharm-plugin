@@ -10,7 +10,7 @@ import com.jetbrains.python.psi.*
 
 class AssignmentAnnotationQuickFix : LocalQuickFix {
     companion object {
-        const val QUICK_FIX_NAME = "SDK: Add static type annotation"
+        const val QUICK_FIX_NAME = "SDK: Declare return type with annotation"
         private val LOG = Logger.getInstance("#com.intellij.codeInspection.ComparingReferencesInspection")
     }
 
@@ -26,8 +26,7 @@ class AssignmentAnnotationQuickFix : LocalQuickFix {
             val statement = descriptor.psiElement as PyAssignmentStatement
 
             val annotatedAssignment = PyElementGenerator.getInstance(project)
-                    .createFromText<PyAssignmentStatement> (LanguageLevel.PYTHON38
-                            , PyAssignmentStatement::class.java, "a: int = b")
+                    .createFromText(LanguageLevel.PYTHON38, PyAssignmentStatement::class.java, "a: int = b")
             statement.leftHandSideExpression?.let { annotatedAssignment.leftHandSideExpression!!.replace(it) }
             statement.assignedValue?.let { annotatedAssignment.assignedValue!!.replace(it) }
             if (statement.lastChild is PsiComment) {

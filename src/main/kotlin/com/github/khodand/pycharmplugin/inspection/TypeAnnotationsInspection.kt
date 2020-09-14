@@ -11,11 +11,20 @@ import com.jetbrains.python.psi.PyElementVisitor
 import com.jetbrains.python.psi.PyFunction
 import org.jetbrains.annotations.NonNls
 
+/**
+ * Implements an inspections to detect when a python variable or a function is assigned without the type specified
+ * in the annotation. Like 'a = b' or 'def myFun():' And proposes fix for the issue, like 'a: int = b' or
+ * 'def myFun() -> int:' respectively.
+ * For now, just int type supported because it is a stub for a future plugin.
+ */
 class TypeAnnotationsInspection : PyInspection() {
+    override fun getShortName(): String {
+        return "TypeAnnotations"
+    }
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PyElementVisitor {
         return object : PyElementVisitor() {
             @NonNls
-            private val DESCRIPTION_TEMPLATE = "SDK adsfafrea"
+            private val DESCRIPTION = "No any type annotations."
 
             override fun visitElement(element: PsiElement) {
                 super.visitElement(element)
@@ -27,14 +36,14 @@ class TypeAnnotationsInspection : PyInspection() {
                     if (element.annotationValue != null) {
                         return
                     }
-                    holder.registerProblem(element, DESCRIPTION_TEMPLATE, AssignmentAnnotationQuickFix())
+                    holder.registerProblem(element, DESCRIPTION, AssignmentAnnotationQuickFix())
                 }
 
                 if (element is PyFunction) {
                     if (element.annotationValue != null) {
                         return
                     }
-                    holder.registerProblem(element, DESCRIPTION_TEMPLATE, FunctionAnnotationQuickFix())
+                    holder.registerProblem(element, DESCRIPTION, FunctionAnnotationQuickFix())
                 }
             }
         }

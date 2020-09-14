@@ -28,8 +28,8 @@ public class FunctionAnnotationQuickFix : LocalQuickFix {
 
             val function = descriptor.psiElement as PyFunction
             val annotatedFunction = PyElementGenerator.getInstance(project)
-                    .createFromText<PyFunction>(LanguageLevel.PYTHON38
-                            , PyFunction::class.java, "def a() -> int:  # hi!\n print(\"Hello World!\")")
+                    .createFromText(LanguageLevel.PYTHON38, PyFunction::class.java
+                            , "def a() -> int:  # hello!\n print(\"Hello World!\")")
 
             function.nameIdentifier?.let { annotatedFunction.nameIdentifier!!.replace(it) }
             annotatedFunction.parameterList.replace(function.parameterList)
