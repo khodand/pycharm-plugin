@@ -4,6 +4,7 @@ import com.intellij.codeInspection.LocalQuickFix
 import com.intellij.codeInspection.ProblemDescriptor
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
+import com.intellij.psi.PsiComment
 import com.intellij.util.IncorrectOperationException
 import com.jetbrains.python.psi.LanguageLevel
 import com.jetbrains.python.psi.PyAssignmentStatement
@@ -33,9 +34,13 @@ public class FunctionAnnotationQuickFix : LocalQuickFix {
             function.nameIdentifier?.let { annotatedFunction.nameIdentifier!!.replace(it) }
             annotatedFunction.parameterList.replace(function.parameterList)
             annotatedFunction.statementList.replace(function.statementList)
-
+            if (function.lastChild.prevSibling.prevSibling is PsiComment) {
+                 annotatedFunction.lastChild.prevSibling.prevSibling.replace(function.lastChild.prevSibling.prevSibling)
+            }
+            else {
+                annotatedFunction.lastChild.prevSibling.prevSibling.delete()
+            }
             function.replace(annotatedFunction)
-
 
         } catch (e: IncorrectOperationException) {
             LOG.error(e)

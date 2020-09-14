@@ -11,7 +11,6 @@ import com.jetbrains.python.psi.PyElementVisitor
 import com.jetbrains.python.psi.PyFunction
 import org.jetbrains.annotations.NonNls
 
-
 class TypeAnnotationsInspection : PyInspection() {
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PyElementVisitor {
         return object : PyElementVisitor() {
@@ -28,19 +27,16 @@ class TypeAnnotationsInspection : PyInspection() {
                     if (element.annotationValue != null) {
                         return
                     }
-                    holder.registerProblem(element,
-                            DESCRIPTION_TEMPLATE, AssignmentAnnotationQuickFix())
+                    holder.registerProblem(element, DESCRIPTION_TEMPLATE, AssignmentAnnotationQuickFix())
                 }
 
                 if (element is PyFunction) {
                     if (element.annotationValue != null) {
                         return
                     }
-                    holder.registerProblem(element,
-                            DESCRIPTION_TEMPLATE, FunctionAnnotationQuickFix())
+                    holder.registerProblem(element, DESCRIPTION_TEMPLATE, FunctionAnnotationQuickFix())
                 }
             }
         }
     }
-
 }
