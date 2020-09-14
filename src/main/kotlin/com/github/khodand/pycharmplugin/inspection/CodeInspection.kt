@@ -1,35 +1,25 @@
 package com.github.khodand.pycharmplugin.inspection
 
+import com.github.khodand.pycharmplugin.inspection.quickFixes.AssignmentAnnotationQuickFix
 import com.intellij.codeInspection.*
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiElementVisitor
-import com.intellij.ui.DocumentAdapter
 import com.intellij.util.IncorrectOperationException
+import com.jetbrains.python.inspections.PyInspection
 import com.jetbrains.python.psi.PyAssignmentStatement
+import com.jetbrains.python.psi.PyElementVisitor
 import org.jetbrains.annotations.NonNls
-import java.awt.FlowLayout
-import javax.swing.JComponent
-import javax.swing.JPanel
-import javax.swing.JTextField
-import javax.swing.event.DocumentEvent
 
-/**
- * Implements an inspection to detect when object references are compared using 'a==b' or 'a!=b'
- * The quick fix converts these comparisons to 'a.equals(b) or '!a.equals(b)' respectively.
- */
-class CodeInspection : LocalInspectionTool() {
-    private val myQuickFix = CriQuickFix()
 
-    override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
-        return object : PsiElementVisitor() {
+class CodeInspection : PyInspection() {
+    private val assignmentQuickFix = AssignmentAnnotationQuickFix()
+
+    override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PyElementVisitor {
+        return object : PyElementVisitor() {
             @NonNls
             private val DESCRIPTION_TEMPLATE = "SDK adsfafrea"
 
-            //             public void visitElement(@NotNull PsiElement element) {
-            //                ProgressIndicatorProvider.checkCanceled();
-            //            }
             override fun visitElement(element: PsiElement) {
                 super.visitElement(element)
                 if (element is PyAssignmentStatement) {
@@ -40,26 +30,24 @@ class CodeInspection : LocalInspectionTool() {
                     }
                     println("registerProblem")
                     holder.registerProblem(element,
-                            DESCRIPTION_TEMPLATE, myQuickFix)
+                            DESCRIPTION_TEMPLATE, assignmentQuickFix)
                 }
             }
         }
     }
 
-    private class CriQuickFix : LocalQuickFix {
+
+    private class FunctionAnnotationQuickFix : LocalQuickFix {
         override fun getName(): String {
             return QUICK_FIX_NAME
         }
 
         override fun applyFix(project: Project, descriptor: ProblemDescriptor) {
             try {
-                val statement = descriptor.psiElement as PyAssignmentStatement
-                if (statement.annotationValue != "") {
+                if (descriptor.psiElement !is PyAssignmentStatement)
                     return
-                }
-                //PyStubElementType
-                //PyAnnotationElementType
-                //statement.addAfter(new PyAnnotationImpl(PyStubElementTypes.ANNOTATION), statement.getFirstChild());
+
+                val statement = descriptor.psiElement as PyAssignmentStatement
             } catch (e: IncorrectOperationException) {
                 LOG.error(e)
             }
