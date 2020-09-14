@@ -5,12 +5,11 @@ import com.intellij.codeInspection.ProblemDescriptor
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import com.intellij.util.IncorrectOperationException
-import com.jetbrains.python.psi.PyAssignmentStatement
+import com.jetbrains.python.psi.*
 
-public class AssignmentAnnotationQuickFix : LocalQuickFix {
+class AssignmentAnnotationQuickFix : LocalQuickFix {
     companion object {
-        // Defines the text of the quick fix intention
-        val QUICK_FIX_NAME = "SDK: Helo boy"
+        const val QUICK_FIX_NAME = "SDK: Add static type annotation"
         private val LOG = Logger.getInstance("#com.intellij.codeInspection.ComparingReferencesInspection")
     }
 
@@ -24,6 +23,14 @@ public class AssignmentAnnotationQuickFix : LocalQuickFix {
                 return
 
             val statement = descriptor.psiElement as PyAssignmentStatement
+
+            val annotatedAssignment = PyElementGenerator.getInstance(project)
+                    .createFromText<PyAssignmentStatement>(LanguageLevel.PYTHON38
+                            , PyAssignmentStatement::class.java, "a: int = b")
+            statement.leftHandSideExpression?.let { annotatedAssignment.leftHandSideExpression!!.replace(it) }
+            statement.assignedValue?.let { annotatedAssignment.assignedValue!!.replace(it) }
+
+            statement.replace(annotatedAssignment)
         } catch (e: IncorrectOperationException) {
             LOG.error(e)
         }
