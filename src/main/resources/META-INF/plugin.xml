@@ -15,6 +15,7 @@
                 groupPath="Python"
                 groupBundle="messages.InspectionsBundle"
                 groupKey="group.names.probable.bugs"
+                shortName="TypeAnnotationsInspection"
                 enabledByDefault="true"
                 level="WARNING"
                 implementationClass="com.github.khodand.pycharmplugin.inspection.TypeAnnotationsInspection"/>

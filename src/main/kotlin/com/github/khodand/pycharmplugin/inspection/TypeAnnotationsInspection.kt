@@ -2,7 +2,7 @@ package com.github.khodand.pycharmplugin.inspection
 
 import com.github.khodand.pycharmplugin.inspection.quickFixes.AssignmentAnnotationQuickFix
 import com.github.khodand.pycharmplugin.inspection.quickFixes.FunctionAnnotationQuickFix
-import com.intellij.codeInspection.*
+import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.lang.Language
 import com.intellij.psi.PsiElement
 import com.jetbrains.python.inspections.PyInspection
@@ -18,9 +18,6 @@ import org.jetbrains.annotations.NonNls
  * For now, just int type supported because it is a stub for a future plugin.
  */
 class TypeAnnotationsInspection : PyInspection() {
-    override fun getShortName(): String {
-        return "TypeAnnotations"
-    }
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PyElementVisitor {
         return object : PyElementVisitor() {
             @NonNls
