@@ -41,6 +41,11 @@ repositories {
 }
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.12.0")
+    testImplementation("junit:junit:4.12")
+}
+
+dependencies {
+
 }
 
 // Configure gradle-intellij-plugin plugin.
