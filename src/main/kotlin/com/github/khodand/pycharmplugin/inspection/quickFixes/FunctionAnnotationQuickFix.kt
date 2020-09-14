@@ -34,10 +34,12 @@ public class FunctionAnnotationQuickFix : LocalQuickFix {
             function.nameIdentifier?.let { annotatedFunction.nameIdentifier!!.replace(it) }
             annotatedFunction.parameterList.replace(function.parameterList)
             annotatedFunction.statementList.replace(function.statementList)
-            if(function.lastChild.prevSibling.prevSibling is PsiComment){
+            if(function.lastChild.prevSibling.prevSibling is PsiComment) {
                  annotatedFunction.lastChild.prevSibling.prevSibling.replace(function.lastChild.prevSibling.prevSibling)
             }
-
+            else {
+                annotatedFunction.lastChild.prevSibling.prevSibling.delete()
+            }
             function.replace(annotatedFunction)
 
         } catch (e: IncorrectOperationException) {
