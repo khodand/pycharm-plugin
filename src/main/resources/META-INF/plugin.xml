@@ -9,8 +9,6 @@
     <depends>com.intellij.modules.python</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.khodand.pycharmplugin.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.khodand.pycharmplugin.services.MyProjectService"/>
         <localInspection
                 language="Python"
                 displayName="SDK: Myfix"
@@ -22,8 +20,4 @@
                 implementationClass="com.github.khodand.pycharmplugin.inspection.TypeAnnotationsInspection"/>
     </extensions>
 
-    <projectListeners>
-        <listener class="com.github.khodand.pycharmplugin.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </projectListeners>
 </idea-plugin>

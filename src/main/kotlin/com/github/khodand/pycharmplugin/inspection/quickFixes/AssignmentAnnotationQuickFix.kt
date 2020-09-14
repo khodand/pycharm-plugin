@@ -4,6 +4,7 @@ import com.intellij.codeInspection.LocalQuickFix
 import com.intellij.codeInspection.ProblemDescriptor
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
+import com.intellij.psi.PsiComment
 import com.intellij.util.IncorrectOperationException
 import com.jetbrains.python.psi.*
 
@@ -26,9 +27,15 @@ class AssignmentAnnotationQuickFix : LocalQuickFix {
 
             val annotatedAssignment = PyElementGenerator.getInstance(project)
                     .createFromText<PyAssignmentStatement>(LanguageLevel.PYTHON38
-                            , PyAssignmentStatement::class.java, "a: int = b")
+                            , PyAssignmentStatement::class.java, "a: int = b  # hi!")
             statement.leftHandSideExpression?.let { annotatedAssignment.leftHandSideExpression!!.replace(it) }
             statement.assignedValue?.let { annotatedAssignment.assignedValue!!.replace(it) }
+            if (statement.lastChild is PsiComment) {
+                annotatedAssignment.lastChild!!.replace(statement.lastChild)
+            }
+            else {
+                annotatedAssignment.lastChild.delete()
+            }
 
             statement.replace(annotatedAssignment)
         } catch (e: IncorrectOperationException) {

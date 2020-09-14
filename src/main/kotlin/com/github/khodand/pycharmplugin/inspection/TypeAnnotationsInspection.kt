@@ -3,6 +3,7 @@ package com.github.khodand.pycharmplugin.inspection
 import com.github.khodand.pycharmplugin.inspection.quickFixes.AssignmentAnnotationQuickFix
 import com.github.khodand.pycharmplugin.inspection.quickFixes.FunctionAnnotationQuickFix
 import com.intellij.codeInspection.*
+import com.intellij.lang.Language
 import com.intellij.psi.PsiElement
 import com.jetbrains.python.inspections.PyInspection
 import com.jetbrains.python.psi.PyAssignmentStatement
@@ -19,6 +20,9 @@ class TypeAnnotationsInspection : PyInspection() {
 
             override fun visitElement(element: PsiElement) {
                 super.visitElement(element)
+                if (element.language != Language.findLanguageByID("Python")) {
+                    return
+                }
 
                 if (element is PyAssignmentStatement) {
                     if (element.annotationValue != null) {
