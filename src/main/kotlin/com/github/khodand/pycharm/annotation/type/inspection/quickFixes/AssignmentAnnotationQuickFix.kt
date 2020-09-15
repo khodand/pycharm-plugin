@@ -1,4 +1,4 @@
-package com.github.khodand.pycharmplugin.inspection.quickFixes
+package com.github.khodand.pycharm.annotation.type.inspection.quickFixes
 
 import com.intellij.codeInspection.LocalQuickFix
 import com.intellij.codeInspection.ProblemDescriptor

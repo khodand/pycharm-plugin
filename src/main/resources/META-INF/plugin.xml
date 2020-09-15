@@ -1,6 +1,6 @@
 <idea-plugin>
-    <id>com.github.khodand.pycharmplugin</id>
-    <name>Pycharm Variables</name>
+    <id>com.github.khodand.pycharm.annotation.type</id>
+    <name>Pycharm Type Annotation Helper</name>
     <vendor email="andrei.khodko@gmail.com">Andrei Khodko</vendor>
 
     <!-- Product and plugin compatibility requirements -->
@@ -18,7 +18,7 @@
                 shortName="TypeAnnotationsInspection"
                 enabledByDefault="true"
                 level="WARNING"
-                implementationClass="com.github.khodand.pycharmplugin.inspection.TypeAnnotationsInspection"/>
+                implementationClass="com.github.khodand.pycharm.annotation.type.inspection.TypeAnnotationsInspection"/>
     </extensions>
 
 </idea-plugin>
