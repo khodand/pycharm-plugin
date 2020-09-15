@@ -20,13 +20,26 @@ import org.jetbrains.annotations.NonNls
 class TypeAnnotationsInspection : PyInspection() {
 
     /**
+     * This method is overridden to provide a custom visitor
+     * that inspects expressions with assignments or functions declarations without annotations.
+     * The visitor must not be recursive and must be thread-safe.
      *
+     * @param holder object for visitor to register problems found.
+     * @param isOnTheFly true if inspection was run in non-batch mode.
+     * @return non-null visitor for this inspection.
+     * @see JavaElementVisitor
      */
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PyElementVisitor {
         return object : PyElementVisitor() {
             @NonNls
             private val DESCRIPTION = "No any type annotations."
 
+            /**
+             * Visits all PsiElements and checks are they instances
+             * of PyAssignmentStatement or PyFunction classes.
+             *
+             * @param element  The PsiElement to be checked.
+             */
             override fun visitElement(element: PsiElement) {
                 super.visitElement(element)
                 if (element.language != Language.findLanguageByID("Python")) {

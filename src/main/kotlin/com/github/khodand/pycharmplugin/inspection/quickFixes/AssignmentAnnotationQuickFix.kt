@@ -11,24 +11,35 @@ import com.jetbrains.python.psi.PyElementGenerator
 import com.jetbrains.python.psi.LanguageLevel
 
 /**
- *
+ * This class provides a solution to inspection not annotated variables by manipulating
+ * the PSI tree to replace 'a = b' with 'a: int = b'
  */
 class AssignmentAnnotationQuickFix : LocalQuickFix {
 
     companion object {
+        /**
+         * Defines the text of the quick fix intention
+         */
         const val QUICK_FIX_NAME = "Declare return type with annotation"
         private val LOG = Logger.getInstance("#com.intellij.codeInspection.ComparingReferencesInspection")
     }
 
     /**
+     * Returns a partially localized string for the quick fix intention.
+     * Used by the test code for this plugin.
      *
+     * @return Quick fix short name.
      */
     override fun getName(): String {
         return QUICK_FIX_NAME
     }
 
     /**
+     * This method manipulates the PSI tree to replace
+     * 'a = b' with 'a: int = b'
      *
+     * @param project    The project that contains the file being edited.
+     * @param descriptor A problem found by this inspection.
      */
     override fun applyFix(project: Project, descriptor: ProblemDescriptor) {
         try {
