@@ -33,17 +33,9 @@ class TypeAnnotationsInspection : PyInspection() {
                     return
                 }
 
-                if (element is PyAssignmentStatement) {
-                    if (element.annotationValue != null) {
-                        return
-                    }
+                if (element is PyAssignmentStatement && element.annotationValue == null) {
                     holder.registerProblem(element, DESCRIPTION, AssignmentAnnotationQuickFix())
-                }
-
-                if (element is PyFunction) {
-                    if (element.annotationValue != null) {
-                        return
-                    }
+                } else if (element is PyFunction && element.annotationValue == null) {
                     holder.registerProblem(element, DESCRIPTION, FunctionAnnotationQuickFix())
                 }
             }

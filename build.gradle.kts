@@ -44,10 +44,6 @@ dependencies {
     testImplementation("junit:junit:4.12")
 }
 
-dependencies {
-
-}
-
 // Configure gradle-intellij-plugin plugin.
 // Read more: https://github.com/JetBrains/gradle-intellij-plugin
 intellij {

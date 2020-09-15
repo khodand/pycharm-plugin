@@ -39,7 +39,7 @@ class AssignmentAnnotationQuickFix : LocalQuickFix {
             val statement = descriptor.psiElement as PyAssignmentStatement
 
             val annotatedAssignment = PyElementGenerator.getInstance(project)
-                    .createFromText(LanguageLevel.PYTHON38, PyAssignmentStatement::class.java, "a: int = b")
+                .createFromText(LanguageLevel.PYTHON38, PyAssignmentStatement::class.java, "a: int = b")
             statement.leftHandSideExpression?.let { annotatedAssignment.leftHandSideExpression!!.replace(it) }
             statement.assignedValue?.let { annotatedAssignment.assignedValue!!.replace(it) }
             if (statement.lastChild is PsiComment) {
