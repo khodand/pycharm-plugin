@@ -20,7 +20,7 @@ class FunctionAnnotationQuickFix : LocalQuickFix {
         /**
          * Defines the text of the quick fix intention
          */
-        const val QUICK_FIX_NAME = "Add static type annotation"
+        const val QUICK_FIX_NAME = "Declare return type with annotation"
         private val LOG = Logger.getInstance("#com.intellij.codeInspection.ComparingReferencesInspection")
     }
 
