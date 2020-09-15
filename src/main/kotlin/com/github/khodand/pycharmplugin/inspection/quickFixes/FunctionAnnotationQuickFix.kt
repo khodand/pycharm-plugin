@@ -32,8 +32,9 @@ class FunctionAnnotationQuickFix : LocalQuickFix {
      */
     override fun applyFix(project: Project, descriptor: ProblemDescriptor) {
         try {
-            if (descriptor.psiElement !is PyFunction)
+            if (descriptor.psiElement !is PyFunction) {
                 return
+            }
 
             val function = descriptor.psiElement as PyFunction
             val annotatedFunction = PyElementGenerator.getInstance(project)
@@ -45,12 +46,10 @@ class FunctionAnnotationQuickFix : LocalQuickFix {
             annotatedFunction.statementList.replace(function.statementList)
             if (function.lastChild.prevSibling.prevSibling is PsiComment) {
                  annotatedFunction.lastChild.prevSibling.prevSibling.replace(function.lastChild.prevSibling.prevSibling)
-            }
-            else {
+            } else {
                 annotatedFunction.lastChild.prevSibling.prevSibling.delete()
             }
             function.replace(annotatedFunction)
-
         } catch (e: IncorrectOperationException) {
             LOG.error(e)
         }
