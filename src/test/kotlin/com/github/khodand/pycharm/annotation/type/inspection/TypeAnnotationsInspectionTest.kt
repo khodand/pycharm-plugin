@@ -1,7 +1,7 @@
-package com.github.khodand.pycharmplugin.inspection
+package com.github.khodand.pycharm.annotation.type.inspection
 
-import com.github.khodand.pycharmplugin.inspection.quickFixes.AssignmentAnnotationQuickFix
-import com.github.khodand.pycharmplugin.inspection.quickFixes.FunctionAnnotationQuickFix
+import com.github.khodand.pycharm.annotation.type.inspection.quickFixes.AssignmentAnnotationQuickFix
+import com.github.khodand.pycharm.annotation.type.inspection.quickFixes.FunctionAnnotationQuickFix
 import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixture4TestCase
 import org.junit.Test
 

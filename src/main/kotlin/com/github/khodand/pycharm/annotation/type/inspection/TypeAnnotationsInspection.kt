@@ -1,7 +1,7 @@
-package com.github.khodand.pycharmplugin.inspection
+package com.github.khodand.pycharm.annotation.type.inspection
 
-import com.github.khodand.pycharmplugin.inspection.quickFixes.AssignmentAnnotationQuickFix
-import com.github.khodand.pycharmplugin.inspection.quickFixes.FunctionAnnotationQuickFix
+import com.github.khodand.pycharm.annotation.type.inspection.quickFixes.AssignmentAnnotationQuickFix
+import com.github.khodand.pycharm.annotation.type.inspection.quickFixes.FunctionAnnotationQuickFix
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.lang.Language
 import com.intellij.psi.PsiElement
@@ -27,7 +27,7 @@ class TypeAnnotationsInspection : PyInspection() {
      * @param holder object for visitor to register problems found.
      * @param isOnTheFly true if inspection was run in non-batch mode.
      * @return non-null visitor for this inspection.
-     * @see JavaElementVisitor
+     * @see PyElementVisitor
      */
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PyElementVisitor {
         return object : PyElementVisitor() {
@@ -36,7 +36,8 @@ class TypeAnnotationsInspection : PyInspection() {
 
             /**
              * Visits all PsiElements and checks are they instances
-             * of PyAssignmentStatement or PyFunction classes.
+             * of PyAssignmentStatement or PyFunction classes
+             * then have they annotation or not.
              *
              * @param element  The PsiElement to be checked.
              */
