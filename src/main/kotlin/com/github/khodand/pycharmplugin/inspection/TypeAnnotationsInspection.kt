@@ -18,6 +18,10 @@ import org.jetbrains.annotations.NonNls
  * For now, just int type supported because it is a stub for a future plugin.
  */
 class TypeAnnotationsInspection : PyInspection() {
+
+    /**
+     *
+     */
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PyElementVisitor {
         return object : PyElementVisitor() {
             @NonNls

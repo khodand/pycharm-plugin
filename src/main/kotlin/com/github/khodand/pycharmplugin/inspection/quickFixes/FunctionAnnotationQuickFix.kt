@@ -7,20 +7,29 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiComment
 import com.intellij.util.IncorrectOperationException
 import com.jetbrains.python.psi.LanguageLevel
-import com.jetbrains.python.psi.PyAssignmentStatement
 import com.jetbrains.python.psi.PyElementGenerator
 import com.jetbrains.python.psi.PyFunction
 
-public class FunctionAnnotationQuickFix : LocalQuickFix {
+/**
+ *
+ */
+class FunctionAnnotationQuickFix : LocalQuickFix {
+
     companion object {
-        const val QUICK_FIX_NAME = "SDK: Add static type annotation"
+        const val QUICK_FIX_NAME = "Add static type annotation"
         private val LOG = Logger.getInstance("#com.intellij.codeInspection.ComparingReferencesInspection")
     }
 
+    /**
+     *
+     */
     override fun getName(): String {
         return QUICK_FIX_NAME
     }
 
+    /**
+     *
+     */
     override fun applyFix(project: Project, descriptor: ProblemDescriptor) {
         try {
             if (descriptor.psiElement !is PyFunction)
