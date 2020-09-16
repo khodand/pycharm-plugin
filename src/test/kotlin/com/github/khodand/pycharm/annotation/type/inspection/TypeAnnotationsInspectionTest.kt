@@ -5,7 +5,6 @@ import com.github.khodand.pycharm.annotation.type.inspection.quickFixes.Function
 import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixture4TestCase
 import org.junit.Test
 
-
 internal class TypeAnnotationsInspectionTest : LightPlatformCodeInsightFixture4TestCase() {
     override fun getTestDataPath(): String? {
         return "src/test/testData"
