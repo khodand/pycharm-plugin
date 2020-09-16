@@ -6,9 +6,9 @@ import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiComment
 import com.intellij.util.IncorrectOperationException
+import com.jetbrains.python.psi.LanguageLevel
 import com.jetbrains.python.psi.PyAssignmentStatement
 import com.jetbrains.python.psi.PyElementGenerator
-import com.jetbrains.python.psi.LanguageLevel
 
 /**
  * This class provides a solution to inspection not annotated variables by manipulating
