@@ -58,7 +58,7 @@ class FunctionAnnotationQuickFix : LocalQuickFix {
             annotatedFunction.parameterList.replace(function.parameterList)
             annotatedFunction.statementList.replace(function.statementList)
             if (function.lastChild.prevSibling.prevSibling is PsiComment) {
-                 annotatedFunction.lastChild.prevSibling.prevSibling.replace(function.lastChild.prevSibling.prevSibling)
+                annotatedFunction.lastChild.prevSibling.prevSibling.replace(function.lastChild.prevSibling.prevSibling)
             } else {
                 annotatedFunction.lastChild.prevSibling.prevSibling.delete()
             }
